@@ -25,32 +25,45 @@
 </head>
 <body class="min-h-screen flex flex-col items-center justify-center p-5 pb-20">
 
-    <div class="mb-10 text-center w-full max-w-2xl flex flex-col items-center">
-        <div class="mb-6 flex items-center justify-center gap-8 h-20 w-full"> 
-            <img src="Johner_Institut_Logo_RGB.png" alt="Johner Institute Logo" class="h-full object-contain">
-            <div class="h-12 w-px bg-slate-200"></div> 
-            <img src="hpi-logo-colored.svg" alt="HPI Logo" class="h-full object-contain">
+    <!-- Responsive Header Area -->
+    <div class="mb-8 text-center w-full max-w-2xl flex flex-col items-center">
+        <div class="mb-6 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 w-full"> 
+            <!-- Logos mit adaptiven Höhen -->
+            <img src="./Johner_Institut_Logo_RGB.png" alt="Johner Institute Logo" class="h-12 sm:h-16 md:h-20 object-contain">
+            
+            <!-- Trennlinie: Horizontal auf Mobile, Vertikal auf Desktop -->
+            <div class="h-px w-16 sm:h-12 sm:w-px bg-slate-200"></div> 
+            
+            <img src="./hpi-logo-colored.svg" alt="HPI Logo" class="h-12 sm:h-16 md:h-20 object-contain">
         </div>
-        <div class="h-px w-full bg-slate-200 mb-8"></div>
-        <h1 class="text-3xl font-bold text-slate-800 uppercase tracking-tight">MDR Qualification Quiz</h1>
-        <p class="text-slate-500 mt-1 text-lg">Medical Device or Not? Test your knowledge!</p>
+        
+        <div class="h-px w-full bg-slate-200 mb-8 opacity-50"></div>
+        
+        <h1 class="text-2xl sm:text-3xl font-bold text-slate-800 uppercase tracking-tight px-4">
+            MDR Qualification Quiz
+        </h1>
+        <p class="text-slate-500 mt-2 text-base sm:text-lg px-4">
+            Medical Device or Not? Test your knowledge!
+        </p>
     </div>
 
+    <!-- Quiz Card -->
     <div class="bg-white max-w-2xl w-full rounded-2xl shadow-xl overflow-hidden border border-slate-100 relative">
-        <div class="flex justify-between items-center px-10 py-4 bg-slate-50 border-bottom border-slate-100">
+        <div class="flex justify-between items-center px-6 sm:px-10 py-4 bg-slate-50 border-b border-slate-100">
             <div class="w-1/2 bg-slate-200 h-2 rounded-full overflow-hidden">
                 <div id="progress" class="progress-bar h-full johner-bg-red" style="width: 0%;"></div>
             </div>
             <div class="flex items-center gap-2">
-                <span class="text-2xl">💰</span>
-                <span id="scoreDisplay" class="text-xl font-bold text-slate-700">0</span>
+                <span class="text-xl sm:text-2xl">💰</span>
+                <span id="scoreDisplay" class="text-lg sm:text-xl font-bold text-slate-700">0</span>
             </div>
         </div>
 
-        <div class="p-10" id="quiz-container">
+        <div class="p-6 sm:p-10" id="quiz-container">
+            <!-- Question Box -->
             <div id="question-box" class="active step">
                 <span id="stepCounter" class="text-xs font-bold uppercase tracking-widest johner-red">Question 1 / 7</span>
-                <h2 id="questionText" class="text-2xl font-bold text-slate-800 mt-2 mb-8 leading-tight">...</h2>
+                <h2 id="questionText" class="text-xl sm:text-2xl font-bold text-slate-800 mt-2 mb-8 leading-tight">...</h2>
                 
                 <div class="grid grid-cols-1 gap-4">
                     <button onclick="handleAnswer(true)" class="option-btn">
@@ -62,17 +75,19 @@
                 </div>
             </div>
 
+            <!-- Feedback Box -->
             <div id="feedback-box" class="step text-center">
                 <div id="feedbackIcon" class="mb-6 inline-block p-4 rounded-full border"></div>
                 <h2 id="feedbackTitle" class="text-2xl font-bold text-slate-800 mb-4">Feedback</h2>
-                <div id="feedbackText" class="p-6 rounded-xl italic text-lg text-slate-700 mb-8 border border-slate-200">
-                    Explanation goes here...
+                <div id="feedbackText" class="p-6 rounded-xl italic text-lg text-slate-700 mb-8 border border-slate-200 text-left sm:text-center">
+                    Explanation...
                 </div>
                 <button onclick="showNextQuestion()" class="johner-bg-red text-white px-10 py-3.5 rounded-xl font-bold johner-btn-hover transition-all shadow-md text-lg w-full">
                     Next Question →
                 </button>
             </div>
 
+            <!-- Result Box -->
             <div id="result" class="step text-center">
                 <div class="mb-6 inline-block p-4 bg-yellow-50 rounded-full border border-yellow-100">
                     <span class="text-5xl">🏆</span>
@@ -91,53 +106,26 @@
                     This quiz is a learning tool. Qualification as a medical device depends on the <strong>manufacturer's specific intended purpose</strong> as per MDR Art. 2.
                 </p>
 
-                <button onclick="location.reload()" class="johner-bg-red text-white px-10 py-3.5 rounded-xl font-bold johner-btn-hover transition-all shadow-md text-lg">Restart Quiz</button>
+                <button onclick="location.reload()" class="johner-bg-red text-white px-10 py-3.5 rounded-xl font-bold johner-btn-hover transition-all shadow-md text-lg w-full sm:w-auto">Restart Quiz</button>
             </div>
         </div>
     </div>
 
-    <footer class="fixed bottom-0 left-0 w-full p-4 bg-slate-50 border-t border-slate-200 text-center text-slate-400 text-xs italic">
+    <footer class="fixed bottom-0 left-0 w-full p-4 bg-slate-50 border-t border-slate-200 text-center text-slate-400 text-[10px] sm:text-xs italic">
         To be used exclusively for the course “Building Products for Digital Health” and is the property of Johner Institut GmbH.
     </footer>
 
     <script>
-const questions = [
-    {
-        text: "Calculation of the correct insulin dose and administration.",
-        isMD: true,
-        explanation: "Intended for the treatment of diabetes mellitus. By calculating patient-specific doses, it directly influences therapy, which constitutes a medical purpose."
-    },
-    {
-        text: "Software for managing doctor's appointments online.",
-        isMD: false,
-        explanation: "This serves organizational and administrative purposes only and does not have a specific medical intended use."
-    },
-    {
-        text: "AI-based software for analyzing CT images to detect cancer.",
-        isMD: true,
-        explanation: "This software is intended for the diagnosis of a disease, which is a core medical purpose under regulatory frameworks."
-    },
-    {
-        text: "A mobile app providing access to general, scientifically sound medical information.",
-        isMD: false,
-        explanation: "Providing general knowledge (library function) without individual assessment or diagnostic claims does not constitute a medical purpose."
-    },
-    {
-        text: "Symptom checker app providing a specific medical recommendation based on individual input.",
-        isMD: true, 
-        explanation: "Individual assessments and the provision of specific therapeutic recommendations qualify the software as a medical device."
-    },
-    {
-        text: "Fitness tracker evaluating vital data (heart rate) without integrated medical interpretation.",
-        isMD: false,
-        explanation: "Data evaluation for general wellness or sports purposes without medical interpretation is typically not classified as a medical device."
-    },
-    {
-        text: "A patient reminder app (calendar) for taking medication without therapy adjustments.",
-        isMD: false,
-        explanation: "A simple digital reminder function is considered an administrative tool and does not qualify as a medical device."
-    }
-];
+        const questions = [
+            { text: "Calculation of the correct insulin dose and administration.", isMD: true, explanation: "Intended for the treatment of diabetes mellitus. By calculating patient-specific doses, it directly influences therapy, which constitutes a medical purpose." },
+            { text: "Software for managing doctor's appointments online.", isMD: false, explanation: "This serves organizational and administrative purposes only and does not have a specific medical intended use." },
+            { text: "AI-based software for analyzing CT images to detect cancer.", isMD: true, explanation: "This software is intended for the diagnosis of a disease, which is a core medical purpose under regulatory frameworks." },
+            { text: "A mobile app providing access to general, scientifically sound medical information.", isMD: false, explanation: "Providing general knowledge (library function) without individual assessment or diagnostic claims does not constitute a medical purpose." },
+            { text: "Symptom checker app providing a specific medical recommendation based on individual input.", isMD: true,  explanation: "Individual assessments and the provision of specific therapeutic recommendations qualify the software as a medical device." },
+            { text: "Fitness tracker evaluating vital data (heart rate) without integrated medical interpretation.", isMD: false, explanation: "Data evaluation for general wellness or sports purposes without medical interpretation is typically not classified as a medical device." },
+            { text: "A patient reminder app (calendar) for taking medication without therapy adjustments.", isMD: false, explanation: "A simple digital reminder function is considered an administrative tool and does not qualify as a medical device." }
+        ];
+
         let currentQ = 0;
         let score = 0;
 
@@ -149,13 +137,10 @@ const questions = [
         function handleAnswer(userAnswer) {
             const q = questions[currentQ];
             const isCorrect = (userAnswer === q.isMD);
-            
-            // Score logic
             const points = isCorrect ? 100 : -50;
             score += points;
             document.getElementById('scoreDisplay').innerText = score;
 
-            // Show floating coin effect
             const coin = document.createElement('div');
             coin.className = 'coin-popup';
             coin.innerText = isCorrect ? '+100 💰' : '-50 💸';
@@ -165,7 +150,6 @@ const questions = [
             document.getElementById('quiz-container').appendChild(coin);
             setTimeout(() => coin.remove(), 1000);
 
-            // Feedback screen transition
             document.getElementById('question-box').classList.remove('active');
             document.getElementById('feedback-box').classList.add('active');
 
@@ -186,8 +170,7 @@ const questions = [
                 icon.className = "mb-6 inline-block p-4 rounded-full border border-red-200 bg-red-50 text-3xl";
                 feedbackBg.className = "p-6 bg-red-50 rounded-xl italic text-lg text-slate-700 mb-8 border border-red-200";
             }
-            
-            document.getElementById('feedbackText').innerHTML = q.explanation;
+            feedbackBg.innerHTML = q.explanation;
         }
 
         function showNextQuestion() {
@@ -195,7 +178,6 @@ const questions = [
             if(currentQ < questions.length) {
                 document.getElementById('feedback-box').classList.remove('active');
                 document.getElementById('question-box').classList.add('active');
-                
                 document.getElementById('stepCounter').innerText = `Question ${currentQ + 1} / ${questions.length}`;
                 document.getElementById('questionText').innerText = questions[currentQ].text;
                 updateProgress();
@@ -211,7 +193,6 @@ const questions = [
             document.getElementById('finalScore').innerText = score;
         }
 
-        // Initialize first question
         document.getElementById('questionText').innerText = questions[0].text;
     </script>
 </body>
