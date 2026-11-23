@@ -65,7 +65,7 @@
         <div class="p-6 sm:p-10" id="quiz-container">
             <!-- Questions -->
             <div id="question-box" class="step">
-                <span id="stepCounter" class="text-xs font-bold uppercase tracking-widest johner-red">Frage 1 / 9</span>
+                <span id="stepCounter" class="text-xs font-bold uppercase tracking-widest johner-red">Frage 1 / 11</span>
                 <h2 id="questionText" class="text-xl sm:text-2xl font-bold text-slate-800 mt-2 mb-6 sm:mb-8 leading-snug">...</h2>
                 <div class="grid grid-cols-1 gap-3.5 sm:gap-4">
                     <button type="button" id="btnIsMD" class="option-btn">
@@ -146,7 +146,9 @@
             { text: "Software, die routinemäßige Laborwerte analysiert, um Personal vor Patienten mit hohem Sepsis-Risiko zu warnen.", isMD: true, explanation: "Die Vorhersage oder Erkennung eines kritischen Zustands (Sepsis) auf Basis individueller Patientendaten ist eine klare medizinische Zweckbestimmung (Prognose/Diagnose)." },
             { text: "Symptom-Checker-App, die auf Basis individueller Nutzereingaben eine spezifische medizinische Empfehlung gibt.", isMD: true, explanation: "Individuelle Bewertungen und spezifische diagnostische oder therapeutische Empfehlungen qualifizieren die Software als Medizinprodukt." },
             { text: "Fitness-Tracker, der beim Sport ohne medizinische Interpretation die Herzfrequenz misst.", isMD: false, explanation: "Die Datenerfassung zu allgemeinen Wellness- oder Sportzwecken ohne medizinische Interpretation ist kein Medizinprodukt." },
-            { text: "Eine einfache Wecker-App, die einen Patienten um 8:00 Uhr an die Einnahme seiner Tabletten erinnert.", isMD: false, explanation: "Eine reine Erinnerungsfunktion ohne Dosisberechnung oder Therapieanpassung ist ein administratives Hilfsmittel und kein Medizinprodukt." }
+            { text: "Eine einfache Wecker-App, die einen Patienten um 8:00 Uhr an die Einnahme seiner Tabletten erinnert.", isMD: false, explanation: "Eine reine Erinnerungsfunktion ohne Dosisberechnung oder Therapieanpassung ist ein administratives Hilfsmittel und kein Medizinprodukt." },
+            { text: "Software, die aus hochauflösenden Hautaufnahmen das individuelle Melanom-Risiko eines Patienten bewertet.", isMD: true, explanation: "Die Bewertung eines Krankheitsrisikos bzw. die Unterstützung bei der Diagnose von Hautkrebs auf Basis individueller Patientendaten ist eine medizinische Zweckbestimmung gemäß MDR Art. 2." },
+            { text: "Dashboard zur Übersicht freier Krankenhausbetten und Stationsauslastung für das Belegungsmanagement.", isMD: false, explanation: "Die rein organisatorische Darstellung von Kapazitäten und Stationsauslastung dient der Ressourcensteuerung und verfolgt keinen medizinischen Zweck im Sinne der MDR." }
         ];
 
         let currentQ = 0;
@@ -186,7 +188,6 @@
             const q = questions[currentQ];
             const isCorrect = (userAnswer === q.isMD);
             
-            // Score & Coin Effect
             const points = isCorrect ? 100 : -50;
             score += points;
             document.getElementById('scoreDisplay').innerText = score;
@@ -199,7 +200,6 @@
             document.getElementById('quiz-container').appendChild(coin);
             setTimeout(function() { coin.remove(); }, 1000);
 
-            // Feedback screen
             currentScreen = "feedback";
             document.getElementById('question-box').classList.remove('active');
             document.getElementById('feedback-box').classList.add('active');
@@ -266,7 +266,6 @@
             }
         }
 
-        // Event-Listener sauber registrieren
         document.getElementById('startQuizBtn').addEventListener('click', startQuiz);
         document.getElementById('btnIsMD').addEventListener('click', function() { handleAnswer(true); });
         document.getElementById('btnNotMD').addEventListener('click', function() { handleAnswer(false); });
